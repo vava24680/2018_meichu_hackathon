@@ -50,3 +50,6 @@ object: 動作後的受詞 (POST)
 ### Usage
 For Beta Version:
 We have to tell Google Assistant 'Talk to Hackathon IoT set AC in ED202 to 26' or 'Ask Hackathon IoT what is the temperature of ED202' 
+
+
+May add select specific id for selecting device in multiple devices
