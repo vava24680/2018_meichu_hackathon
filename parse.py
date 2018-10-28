@@ -30,6 +30,8 @@ locat= [
 
 def parse(input_data):
   global output_data
+  for key in output_data.keys():
+    output_data[key] = None
   try:
     if input_data['queryResult']['outputContexts'][0]['lifespanCount'] != None:
       return 0
@@ -58,9 +60,10 @@ def SendParse(output_data):
     "CK": "DKR95B0TT0XT2K5PF9",
     "Content-Type": "application/json"
   }
-  if output_data['id'] != None:
+  if output_data['id'] != None and output_data['on'] != None:
     send_dict = {'id':output_data['id'], 'on':output_data['on']}
     DAN.push_data_to_IoTtalk(send_dict,"JsonReceiver")
+    return {"fulfillmentText": output_data['id'] + " has been turned " + output_data['on']}
   elif output_data['object_school']!= None and output_data['temperature']!= None and output_data['location_school']!= None and output_data['number']!= None:
     send_dict= {'id': output_data['location_school']+"_"+output_data['object_school']+"_"+"controller"+"_"+str(output_data['number']), 'time':datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S'), 'lat':"", 'lon':"", 'save': "true", 'value': [str(output_data['temperature']['amount'])]}
     test = [send_dict]
